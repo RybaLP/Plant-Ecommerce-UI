@@ -1,0 +1,1 @@
+export type PlantType = 'DECIDUOUS' | 'CONIFEROUS' | 'FLOWERING' | 'HERBAL' | 'OTHER';

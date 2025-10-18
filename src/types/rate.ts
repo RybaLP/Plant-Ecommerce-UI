@@ -1,0 +1,1 @@
+export type Rate = "RECOMMEND" | "NOT_RECOMMEND";
