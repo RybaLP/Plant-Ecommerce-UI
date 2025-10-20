@@ -11,6 +11,7 @@ import OrderPage from "./pages/orderPage"
 import AuthenticationGatewayPage from "./pages/authenticationGatewayPage"
 import GuestOrderPage from "./pages/guestOrderPage"
 import { useAllPlants } from "./hooks/useAllPlants"
+import ResetPasswordPage from "./pages/resetPasswordPage"
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/koszyk/konto" element={<AuthenticationGatewayPage/>}/>
           <Route path="/koszyk/adres" element={<GuestOrderPage/>} />
           <Route path="/koszyk/zamowienie" element={<OrderPage/>} />
+          <Route path="/resetowanie-hasla" element={<ResetPasswordPage/>} />
         </Routes>
 
         <Toaster 

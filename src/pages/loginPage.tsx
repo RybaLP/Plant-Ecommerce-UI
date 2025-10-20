@@ -1,28 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, type FormEvent } from 'react';
 import type { LoginForm } from '../interfaces/loginForm';
 import { authenticateUser } from '../api/authenticate';
 import { useAuthenticationStore } from '../store/authenticationStore';
 import { useNavigate } from 'react-router-dom';
 import LoginFormComp from '../components/loginFormComp';
 import RegisterComp from '../components/registerComp';
+import toast from 'react-hot-toast';
+import { sendResetPasswordUrl } from '../api/sendResetPasswordUrl';
 
 const LoginPage = () => {
-
   const navigate = useNavigate();
-
+  
+  const [emailToResetPassword,setEmailToResetPassword] = useState("");
+  const [isForgotPasswordOpen,setIsForgotPasswordOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const setAuthenticated = useAuthenticationStore((state)=>state.setAuthenticated);
-
   const [formData , setFormData] = useState<LoginForm>({
       email : '',
       password : ''
   });
 
+  const setAuthenticated = useAuthenticationStore((state)=>state.setAuthenticated);
+
   const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
       const {name , value} = e.target;
       setFormData({...formData , [name] : value});
   }
+
+  const handleSendEmail = async (e : FormEvent) => {
+    
+    e.preventDefault();
+
+    try {
+        const response = await sendResetPasswordUrl(emailToResetPassword);
+        if (response >= 200 && response < 300) {
+          
+            toast.success("Wysłano na pocztę link do zmiany hasła");
+        }
+    } catch (error: any) {
+        toast.error(error.message || "Nie udało się wysłać linku resetującego hasło");
+    }
+ }
 
   const validate = () => {
     let newErrors: Record<string, string> = {};
@@ -58,8 +75,10 @@ const LoginPage = () => {
         <RegisterComp/>
 
         {/* right column (login section) */}
-        <LoginFormComp formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
-
+        <LoginFormComp formData={formData} handleChange={handleChange} handleSubmit={handleSubmit}  
+        isForgotPasswordOpen={isForgotPasswordOpen} setIsForgotPasswordOpen={setIsForgotPasswordOpen}
+        emailToResetPassword={emailToResetPassword} setEmailToResetPassword={setEmailToResetPassword}
+        handleSendEmail={handleSendEmail} />
         </div>
     </section>
   );

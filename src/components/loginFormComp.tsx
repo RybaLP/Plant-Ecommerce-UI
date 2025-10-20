@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { type FormEvent, type SetStateAction } from 'react'
 import type { LoginForm } from '../interfaces/loginForm'
 import { FaFacebook , FaGoogle} from 'react-icons/fa'
+import ForgotPassword from './notifications/forgotPassword';
 
 interface Props {
     handleSubmit : (e : React.FormEvent) => void,
     handleChange : (e : React.ChangeEvent<HTMLInputElement>) => void,
     formData : LoginForm,
+    isForgotPasswordOpen : boolean,
+    setIsForgotPasswordOpen : React.Dispatch<SetStateAction<boolean>>;
+    handleSendEmail : (e : FormEvent) => void | Promise<void>;
+    emailToResetPassword : string;
+    setEmailToResetPassword : React.Dispatch<SetStateAction<string>>;
 }
 
-const LoginFormComp = ({handleSubmit, handleChange, formData} : Props) => {
+const LoginFormComp = ({handleSubmit, handleChange, formData, isForgotPasswordOpen, setIsForgotPasswordOpen,
+   handleSendEmail, emailToResetPassword, setEmailToResetPassword} : Props) => {
+  
   return (
     <div className="md:w-1/2 p-8 flex flex-col items-center md:items-start">
           <h2 className="text-xl font-bold text-gray-800 mb-6">ZALOGUJ SIĘ</h2>
@@ -57,15 +65,19 @@ const LoginFormComp = ({handleSubmit, handleChange, formData} : Props) => {
                 POKAŻ HASŁO
               </button>
             </div>
-            <a href="/reset-password" className="text-sm text-gray-500 block text-right hover:underline">
+            <a className="text-sm text-gray-500 block text-right hover:underline hover:cursor-pointer" onClick={()=>setIsForgotPasswordOpen(true)}>
               Nie pamiętam hasła
             </a>
+            
             <button type="submit" onClick={handleSubmit} className="w-full bg-orange-500 text-white font-bold py-3 rounded-full hover:bg-orange-600 transition-colors">
               ZALOGUJ SIĘ
             </button>
           </form>
+
+          {isForgotPasswordOpen && <ForgotPassword setIsForgotPasswordOpen={setIsForgotPasswordOpen} emailToResetPassword={emailToResetPassword} setEmailToResetPassword={setEmailToResetPassword} 
+          handleSendEmail={handleSendEmail} />}
         </div>
   )
 }
 
-export default LoginFormComp
+export default LoginFormComp;
