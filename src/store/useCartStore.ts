@@ -5,24 +5,22 @@ import type { GuestCartStore } from "../interfaces/zustand-stores/guestCartStore
 export const useCartStore = create<GuestCartStore>()(
   persist(
     (set, get) => ({
-      
-      cart: { items : [] },
-      totalPrice : 0,
+      cart: { items: [] },
+      totalPrice: 0,
 
       addItem: (item) => {
         const { cart } = get();
-        const existing = cart.items.find((i) => i.plantId === item.plantId);
+        const currentItems = cart?.items ?? [];
 
-        let updatedItems;
-        if (existing) {
-          updatedItems = cart.items.map((i) =>
-            i.plantId === item.plantId
-              ? { ...i, quantity: i.quantity + item.quantity }
-              : i
-          );
-        } else {
-          updatedItems = [...cart.items, item];
-        }
+        const existing = currentItems.find((i) => i.plantId === item.plantId);
+
+        const updatedItems = existing
+          ? currentItems.map((i) =>
+              i.plantId === item.plantId
+                ? { ...i, quantity: i.quantity + item.quantity }
+                : i
+            )
+          : [...currentItems, item];
 
         set({ cart: { items: updatedItems } });
         get().setTotalPrice();
@@ -30,14 +28,18 @@ export const useCartStore = create<GuestCartStore>()(
 
       removeItem: (plantId) => {
         const { cart } = get();
-        const updatedItems = cart.items.filter((i) => i.plantId !== plantId);
+        const currentItems = cart?.items ?? [];
+
+        const updatedItems = currentItems.filter((i) => i.plantId !== plantId);
         set({ cart: { items: updatedItems } });
         get().setTotalPrice();
       },
 
       updateQuantity: (plantId, quantity) => {
         const { cart } = get();
-        const updatedItems = cart.items.map((i) =>
+        const currentItems = cart?.items ?? [];
+
+        const updatedItems = currentItems.map((i) =>
           i.plantId === plantId ? { ...i, quantity } : i
         );
 
@@ -45,25 +47,34 @@ export const useCartStore = create<GuestCartStore>()(
         get().setTotalPrice();
       },
 
-     clearCart: () => {
-        set({ cart: { items: [] }, totalPrice: 0 }); 
+      clearCart: () => {
+        set({ cart: { items: [] }, totalPrice: 0 });
       },
-      setCart: (cart) => set({ cart }),
 
+      setCart: (cart) => set({ cart }),
 
       setTotalPrice: () => {
         const { cart } = get();
-        const updatedPrice = cart.items.reduce(
-          (total,item) => {
-            const price = item.plant?.price ?? 0;
-            return total + (price * item.quantity);
-          },0
-        )
-        set({totalPrice : updatedPrice});
-        }
+        const currentItems = cart?.items ?? [];
+
+        const updatedPrice = currentItems.reduce((total, item) => {
+          const price = item.plant?.price ?? 0;
+          return total + price * item.quantity;
+        }, 0);
+
+        set({ totalPrice: updatedPrice });
+      },
     }),
     {
       name: "guest-cart-storage",
+      onRehydrateStorage: () => (state, error) => {
+        if (!state?.cart) {
+          useCartStore.setState({ cart: { items: [] }, totalPrice: 0 });
+        }
+        if (error) {
+          console.error("Błąd przy rehydratacji koszyka:", error);
+        }
+      },
     }
   )
 );

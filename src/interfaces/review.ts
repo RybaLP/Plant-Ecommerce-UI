@@ -5,5 +5,5 @@ export interface Review {
     rate : Rate , 
     comment : string , 
     reviewDate : Date,
-    username : string
+    username : string,
 }

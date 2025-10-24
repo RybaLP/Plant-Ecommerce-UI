@@ -12,4 +12,6 @@ export interface GuestFormStore {
 
   setGuestInfo: (data: Partial<GuestFormStore>) => void;
   clearGuestForm: () => void;
+
+  updateGuestAddress : (updatedAddress : Address) => void;
 }

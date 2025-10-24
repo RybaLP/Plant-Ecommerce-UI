@@ -1,6 +1,7 @@
 import { FaUser } from 'react-icons/fa';
 import { useAuthenticationStore } from '../../store/authenticationStore';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const UserMenu = () => {
   const isAuthenticated = useAuthenticationStore(state => state.isAuthenticated);
@@ -10,6 +11,7 @@ const UserMenu = () => {
 
   const handleLogOut = () => {
     logout();
+    toast.success("Pomyślnie wylogowano");
     navigate("/");
   }
 
@@ -26,12 +28,11 @@ const UserMenu = () => {
                    pointer-events-none group-hover:pointer-events-auto"
       >
         {isAuthenticated ? (
-
           
           <ul>
-            <li className="px-4 py-2 hover:bg-[#444] cursor-pointer">Zamówienia</li>
-            <li className="px-4 py-2 hover:bg-[#444] cursor-pointer">Opinie</li>
-            <li className="px-4 py-2 hover:bg-[#444] cursor-pointer">Adres wysyłkowy</li>
+            <li className="px-4 py-2 hover:bg-[#444] cursor-pointer" onClick={()=>navigate("/uzytkownik/zamowienia")}>Zamówienia</li>
+            <li className="px-4 py-2 hover:bg-[#444] cursor-pointer" onClick={()=>navigate("/uzytkownik/opinie")}>Opinie</li>
+            <li className="px-4 py-2 hover:bg-[#444] cursor-pointer" onClick={()=>navigate("/uzytkownik/adres")}>Adres wysyłkowy</li>
             <li className="px-4 py-2 hover:bg-[#444] cursor-pointer" onClick={handleLogOut}>Wyloguj</li>
           </ul>
         ) : (

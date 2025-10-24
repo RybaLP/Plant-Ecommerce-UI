@@ -60,6 +60,7 @@ const LoginPage = () => {
         if(success) {
           setAuthenticated();
           navigate("/");
+          toast.success("Pomyślnie zalogowano!");
         } else {
           alert("Błędne dane logowania");
         }

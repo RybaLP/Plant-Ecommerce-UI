@@ -32,12 +32,12 @@ const ProductGrid = () => {
             <h2 className='text-center text-4xl font-bold text-green-800 mb-10'>Wybrane dla ciebie</h2>
             <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6'>
                 {plants?.map((plant : Plant) => (
-            <article key={plant.id} className="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
+            <article key={plant.id} className="hover:cursor-pointer bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
             onClick={()=>navigate(`/produkt/${plant.id}`)}>
               <div className="relative">
                 <img src={plant.imageUrl} alt={plant.name} className="w-full h-48 object-cover" />
                 <button
-                  className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-green-700 text-white font-semibold py-2 px-4 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  className="hover:cursor-pointer absolute bottom-2 left-1/2 -translate-x-1/2 bg-green-700 text-white font-semibold py-2 px-4 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"
                   onClick={(e)=>{ e.stopPropagation() ; handleAddToCart({plantId : plant.id , quantity : 1 , plant})}}
                 >
                   + Do koszyka

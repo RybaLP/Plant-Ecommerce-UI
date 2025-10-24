@@ -12,6 +12,12 @@ import AuthenticationGatewayPage from "./pages/authenticationGatewayPage"
 import GuestOrderPage from "./pages/guestOrderPage"
 import { useAllPlants } from "./hooks/useAllPlants"
 import ResetPasswordPage from "./pages/resetPasswordPage"
+import NotFoundPage from "./pages/notFoundPage"
+import OrderConfirmationPage from "./pages/orderConfirmationPage"
+import ClientOrdersPage from "./pages/clientOrdersPage"
+import ClientOpinionsPage from "./pages/clientOpinionPages"
+import NotReviewedItemsPage from "./pages/notReviewedItemsPage"
+import AddressPage from "./pages/addressPage"
 
 function App() {
 
@@ -33,6 +39,13 @@ function App() {
           <Route path="/koszyk/adres" element={<GuestOrderPage/>} />
           <Route path="/koszyk/zamowienie" element={<OrderPage/>} />
           <Route path="/resetowanie-hasla" element={<ResetPasswordPage/>} />
+          <Route path="/zamowienie" element={<OrderConfirmationPage/>} />
+          <Route path="/uzytkownik/zamowienia" element={<ClientOrdersPage/>} />
+          <Route path="/uzytkownik/opinie" element={<ClientOpinionsPage/>} />
+          <Route path="/uzytkownik/opinie/nie-zrecenzowane" element={<NotReviewedItemsPage/>} />
+          <Route path="/uzytkownik/adres" element={<AddressPage/>} />
+           
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
 
         <Toaster 

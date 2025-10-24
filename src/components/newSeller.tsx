@@ -13,7 +13,7 @@ const NewSeller = () => {
 
   return (
     <section 
-      className="relative bg-cover bg-center text-white py-16 px-4 md:px-8 lg:px-16"
+      className="relative bg-cover bg-center text-white py-16 px-4 md:px-8 lg:px-16 mt-10"
       style={{ backgroundImage: "url('/newsellersection.jpg')" }}
     >
         <div className="absolute inset-0 bg-black opacity-50"></div>

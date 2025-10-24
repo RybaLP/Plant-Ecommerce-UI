@@ -1,0 +1,1 @@
+export type OrderType = "NEW" | "PAID" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED" | "RETURNED";

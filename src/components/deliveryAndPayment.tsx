@@ -6,34 +6,66 @@ import type { GuestFormStore } from "../interfaces/zustand-stores/guestFormStore
 import { useState } from "react";
 import { useGuestFormStore } from "../store/useGuestFormStore";
 import { useAuthenticationStore } from "../store/authenticationStore";
-
+import { GoPencil } from "react-icons/go";
+import UpdateAddressForm from "./updateAddressForm";
+import type { Address } from "../interfaces/address";
+import toast from "react-hot-toast";
+import { useUpdateClientAddress } from "../hooks/useUpdateClientAddress";
 
 interface PropType {
   setDeliveryPrice: React.Dispatch<React.SetStateAction<number>>;
   deliveryPrice : number;
   isCompanyOrder : boolean,
+  isAddressFormOpen : boolean;
   setPayOnDelivery : React.Dispatch<React.SetStateAction<boolean>>;
   setGuestInfo : (data : Partial<GuestFormStore>) => void;
   setNip : React.Dispatch<React.SetStateAction<string>>;
   setCompanyName : React.Dispatch<React.SetStateAction<string>>;
   setIsCompanyOrder : React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAddressFormOpen : React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DeliveryAndPayment = ({setDeliveryPrice, deliveryPrice, setPayOnDelivery, setGuestInfo, setIsCompanyOrder, isCompanyOrder} : PropType) => {
+const DeliveryAndPayment = ({setDeliveryPrice, deliveryPrice, setPayOnDelivery, setGuestInfo, setIsCompanyOrder, isCompanyOrder, isAddressFormOpen, setIsAddressFormOpen} : PropType) => {
 
   const {isAuthenticated} = useAuthenticationStore();
 
+
   const [companyName, setCompanyName] = useState("");
   const [nip, setNip] = useState("");
+
+  const {mutateAsync} = useUpdateClientAddress();
   
   // guest address
-  const {shippingAddress,guestEmail,guestPhone,guestFirstName,guestLastName} = useGuestFormStore();
+  const {shippingAddress,guestEmail,guestPhone,guestFirstName,guestLastName, updateGuestAddress} = useGuestFormStore();
 
   // user address
   const {clientContactInfo} = useClientContactInfo();
   const {client} = useClientInfo();
 
-  const finalShippingAddress = isAuthenticated ? clientContactInfo?.address : shippingAddress; 
+  const finalShippingAddress = isAuthenticated ? clientContactInfo?.address : shippingAddress;
+  
+  
+  // update address function
+  const handleSubmitUpdatedAddress = async (updatedAddress : Address) => {
+    try {
+      if (!isAuthenticated) {
+        updateGuestAddress(updatedAddress);
+        setIsAddressFormOpen(false);
+        toast.success("Pomyślnie zaktualizowano adres.");
+        return;
+      }
+
+      try {
+        await mutateAsync(updatedAddress);
+        setIsAddressFormOpen(false);
+      } catch (error) {
+        toast.error("Nie udało się zaktualizować adresu.");   
+      }
+
+    } catch (error) {
+        toast.error("Nie udało się zaktualizować adresu.");   
+    }
+  }
 
 
   return (
@@ -91,7 +123,18 @@ const DeliveryAndPayment = ({setDeliveryPrice, deliveryPrice, setPayOnDelivery, 
         {/* adress info */}
 
         <div className="p-6 border rounded-lg flex flex-col gap-3">
-          <h2 className="font-semibold text-lg">Adres dostawy</h2>
+          <div className="flex flewx-row items-center">
+            <h2 className="font-semibold text-lg">Adres dostawy</h2>
+            <div className="ml-3 flex flex-row hover:cursor-pointer items-center gap-2 bg-gray-300 rounded-full p-1 border-2 border-black"
+            onClick={()=>setIsAddressFormOpen(true)}>
+                <span className="font-semibold">Edytuj adres</span>
+                <GoPencil/>
+            </div>
+
+            {isAddressFormOpen && <UpdateAddressForm setIsAddressFormOpen = {setIsAddressFormOpen} handleSubmitUpdatedAddress = {handleSubmitUpdatedAddress}
+            finalShippingAddress = {finalShippingAddress}/>}
+          </div>
+            
           <div className="text-gray-800 space-y-1">
             <span>{isAuthenticated ? client?.firstName : guestFirstName} {isAuthenticated ? client?.lastName : guestLastName}</span>
             <br />
