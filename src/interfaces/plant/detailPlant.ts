@@ -9,5 +9,6 @@ export interface DetailPlant {
     category : PlantType,
     description : string , 
     quantityInStock : number,
-    reviews : Review[]
+    reviews : Review[],
+    size : string;
 }

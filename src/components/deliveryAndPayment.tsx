@@ -11,6 +11,7 @@ import UpdateAddressForm from "./updateAddressForm";
 import type { Address } from "../interfaces/address";
 import toast from "react-hot-toast";
 import { useUpdateClientAddress } from "../hooks/useUpdateClientAddress";
+import type { ClientContactInfo } from "../interfaces/clientContactInfo";
 
 interface PropType {
   setDeliveryPrice: React.Dispatch<React.SetStateAction<number>>;
@@ -23,9 +24,10 @@ interface PropType {
   setCompanyName : React.Dispatch<React.SetStateAction<string>>;
   setIsCompanyOrder : React.Dispatch<React.SetStateAction<boolean>>;
   setIsAddressFormOpen : React.Dispatch<React.SetStateAction<boolean>>;
+  clientContactInfo : ClientContactInfo | undefined | null;
 }
 
-const DeliveryAndPayment = ({setDeliveryPrice, deliveryPrice, setPayOnDelivery, setGuestInfo, setIsCompanyOrder, isCompanyOrder, isAddressFormOpen, setIsAddressFormOpen} : PropType) => {
+const DeliveryAndPayment = ({setDeliveryPrice, deliveryPrice, setPayOnDelivery, setGuestInfo, setIsCompanyOrder, isCompanyOrder, isAddressFormOpen, setIsAddressFormOpen, clientContactInfo} : PropType) => {
 
   const {isAuthenticated} = useAuthenticationStore();
 
@@ -39,7 +41,6 @@ const DeliveryAndPayment = ({setDeliveryPrice, deliveryPrice, setPayOnDelivery, 
   const {shippingAddress,guestEmail,guestPhone,guestFirstName,guestLastName, updateGuestAddress} = useGuestFormStore();
 
   // user address
-  const {clientContactInfo} = useClientContactInfo();
   const {client} = useClientInfo();
 
   const finalShippingAddress = isAuthenticated ? clientContactInfo?.address : shippingAddress;

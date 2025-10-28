@@ -5,12 +5,17 @@ import type { LoginForm } from "../interfaces/loginForm";
 import { authenticateUser } from "../api/authenticate";
 import LoginFormComp from "../components/loginFormComp";
 import RegisterComp from "../components/registerComp";
+import { sendResetPasswordUrl } from "../api/sendResetPasswordUrl";
+import toast from "react-hot-toast";
+
 
 const AuthenticationGatewayPage = () => {
 
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [emailToResetPassword,setEmailToResetPassword] = useState("");
+  const [isForgotPasswordOpen,setIsForgotPasswordOpen] = useState(false);
 
   const setAuthenticated = useAuthenticationStore((state)=>state.setAuthenticated);
 
@@ -50,11 +55,26 @@ const AuthenticationGatewayPage = () => {
         alert("Wystąpił problem. Spróbuj ponownie");
      }
   }
+
+  const handleSendEmail = async (e : React.FormEvent) => {
+    
+    e.preventDefault();
+
+    try {
+        const response = await sendResetPasswordUrl(emailToResetPassword);
+        if (response >= 200 && response < 300) {
+          
+            toast.success("Wysłano na pocztę link do zmiany hasła");
+        }
+    } catch (error: any) {
+        toast.error(error.message || "Nie udało się wysłać linku resetującego hasło");
+    }
+ }
   
     return (
         <section className="bg-gray-50 py-12 px-4 md:px-8 font-sans mt-10">
           <div className="container mx-auto max-w-5xl bg-white shadow-lg rounded-lg flex flex-col md:flex-row">
-            <LoginFormComp formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
+            <LoginFormComp formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} isForgotPasswordOpen={isForgotPasswordOpen} handleSendEmail={handleSendEmail} setIsForgotPasswordOpen={setIsForgotPasswordOpen} emailToResetPassword={emailToResetPassword} setEmailToResetPassword={setEmailToResetPassword}/>
             <RegisterComp/>
 
             <div className="text-xl text-center space-y-5">

@@ -6,14 +6,18 @@ import { CiSquareMinus, CiSquarePlus } from 'react-icons/ci';
 import ReviewSection from '../components/reviewSection';
 import toast from "react-hot-toast";
 import { useAuthenticationStore } from '../store/authenticationStore';
+import { useGetPlantReviews } from '../hooks/useGetPlantReviews';
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { plant, isLoading, isError } = usePlant(id!);
+  const {data : reviews , isLoading : reviewsLoading} = useGetPlantReviews(Number(id));
+
   const { addToCart } = useAddToCart();
   const [quantity, setQuantity] = useState(1);
 
   const {isAuthenticated} = useAuthenticationStore();
+
 
   if (isLoading) return <p className="text-center py-10">Ładowanie...</p>;
   if (isError) return <p className="text-center text-red-600 py-10">Błąd podczas pobierania roślin</p>;
@@ -118,7 +122,7 @@ const ProductPage = () => {
       </div>
 
       <section className="mt-12 bg-white rounded-lg shadow-lg p-6">
-        <ReviewSection reviews={plant.reviews} />
+        <ReviewSection reviews={reviews ?? []}/>
       </section>
 
     </section>

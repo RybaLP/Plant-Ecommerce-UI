@@ -7,5 +7,6 @@ export interface Plant {
     imageUrl : string , 
     category : PlantType,  
     quantityInStock : number,
-    description : string
+    description : string,
+    size : string;
 }

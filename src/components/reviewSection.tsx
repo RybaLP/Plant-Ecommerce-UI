@@ -20,7 +20,7 @@ const ReviewSection = ({ reviews }: Props) => {
                     className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
                     <div className="flex justify-between items-center mb-2">
-                        <span className="font-semibold text-gray-800">{review.username}</span>
+                        <span className="font-semibold text-gray-800">{review.username ?? "użytkownik"}</span>
                         <span
                             className={`px-2 py-1 rounded-full text-sm font-medium ${
                                 review.rate === "NOT_RECOMMEND"

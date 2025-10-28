@@ -7,10 +7,12 @@ export const useAllPlants = () => {
     const {data, isLoading, isError, error} = useQuery<Plant[]>({
         queryKey : ["all-plants"],
         queryFn : getAllPLants,
+        staleTime: 1000 * 60 * 5, 
+        retry: 1, 
     })
 
     return {
-        plants : data,
+        plants : data ?? [],
         isLoading,
         isError,
         error

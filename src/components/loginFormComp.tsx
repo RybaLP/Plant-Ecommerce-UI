@@ -26,10 +26,15 @@ const LoginFormComp = ({handleSubmit, handleChange, formData, isForgotPasswordOp
               <FaFacebook size={24} className="mr-4 text-blue-600" aria-hidden="true" />
               <span>FACEBOOK</span>
             </button>
-            <button className="flex items-center justify-center w-full bg-white text-gray-700 border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition-colors">
+
+            {/* google oauth2*/}
+            <a 
+              href="http://localhost:8080/oauth2/authorization/google"
+              className="flex items-center justify-center w-full bg-white text-gray-700 border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition-colors"
+            >
               <FaGoogle size={24} className="mr-4" aria-hidden="true" />
               <span>GOOGLE</span>
-            </button>
+            </a>
           </div>
 
           <p className="text-gray-500 mb-4">Lub</p>

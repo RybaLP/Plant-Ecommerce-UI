@@ -1,0 +1,1 @@
+export type FilterType = "asc" | "desc" | "lowAmount" | "highAmount" | "default";

@@ -120,7 +120,7 @@ const CartPage = () => {
             </div>
 
             <div className="mt-4 flex justify-end">
-              <button className="p-4 font-bold bg-orange-500 text-white" onClick={handleContinue}>
+              <button className="p-4 font-bold bg-orange-500 text-white hover:cursor-pointer rounded-2xl" onClick={handleContinue}>
                Przejdź do podsumowania
               </button>
             </div>
@@ -228,7 +228,7 @@ const CartPage = () => {
             </div>
 
             <div className="mt-4 flex justify-end">
-              <button className="p-4 font-bold bg-orange-500 text-white" onClick={handleContinue}>
+              <button className="p-4 font-bold bg-orange-500 text-white hover:cursor-pointer rounded-2xl" onClick={handleContinue}>
                Przejdź do podsumowania
               </button>
             </div>

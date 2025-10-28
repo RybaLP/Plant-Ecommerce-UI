@@ -3,15 +3,15 @@ import { getClientAddress } from "../api/getClientAddress";
 import type { ClientContactInfo } from "../interfaces/clientContactInfo";
 
 export function useClientContactInfo () {
-    const {data, isError, isLoading} = useQuery <ClientContactInfo> ({
+    const {data, isError, isLoading, isFetched} = useQuery <ClientContactInfo> ({
         queryKey : ["client-contact-info"],
-        queryFn : getClientAddress
+        queryFn : getClientAddress,
     })
 
     return {
         clientContactInfo : isError ? null : data,
         isError,
-        isLoading
+        isLoading,
+        isFetched
     }
 }
-
