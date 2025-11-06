@@ -1,1 +1,1 @@
-export type PlantType = 'DECIDUOUS' | 'CONIFEROUS' | 'FLOWERING' | 'HERBAL' | 'OTHER' | 'FRUIT';
+export type PlantType = 'DECIDUOUS' | 'CONIFEROUS' | 'FLOWERING' | 'HERBAL' | 'OTHER' | 'FRUIT' | "ORNAMENTAL";

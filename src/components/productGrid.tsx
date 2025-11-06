@@ -51,11 +51,6 @@ const ProductGrid = () => {
           ))}
             </div>
 
-            <div className="text-center mt-10">
-            <a href="/produkty" className="inline-block bg-green-800 text-white font-semibold py-3 px-8 rounded-full hover:bg-green-700 transition-colors duration-300">
-                Pokaż wszystkie produkty
-            </a>
-        </div>
         </div>
     </section>
   )

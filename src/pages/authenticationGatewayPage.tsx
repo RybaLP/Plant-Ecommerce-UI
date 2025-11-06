@@ -7,6 +7,8 @@ import LoginFormComp from "../components/loginFormComp";
 import RegisterComp from "../components/registerComp";
 import { sendResetPasswordUrl } from "../api/sendResetPasswordUrl";
 import toast from "react-hot-toast";
+import { FaArrowRight } from "react-icons/fa";
+import { FaUserClock } from "react-icons/fa";
 
 
 const AuthenticationGatewayPage = () => {
@@ -77,12 +79,31 @@ const AuthenticationGatewayPage = () => {
             <LoginFormComp formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} isForgotPasswordOpen={isForgotPasswordOpen} handleSendEmail={handleSendEmail} setIsForgotPasswordOpen={setIsForgotPasswordOpen} emailToResetPassword={emailToResetPassword} setEmailToResetPassword={setEmailToResetPassword}/>
             <RegisterComp/>
 
-            <div className="text-xl text-center space-y-5">
-              <h1 className="font-bold mt-10">Zakupy bez konta </h1>
-              <span>Kup jako gość bez zakładania konta</span>
-              <button className="hover:cursor-pointer p-2 bg-orange-500 rounded-full text-white font-bold"
-              onClick={()=>navigate("/koszyk/adres")}>Kontynuuj bez logowania</button>
+              <div className="flex-1 bg-gradient-to-br from-orange-50 to-amber-50 p-8 flex flex-col justify-center items-center text-center border-l border-gray-200">
+          <div className="mb-6">
+            <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FaUserClock className="text-white text-2xl" />
             </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Zakupy bez konta</h2>
+            <p className="text-gray-600 mb-6 max-w-xs mx-auto">
+              Kup jako gość bez zakładania konta. Szybko i wygodnie!
+            </p>
+          </div>
+
+          <button 
+            onClick={() => navigate("/koszyk/adres")}
+            className="group bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-3"
+          >
+            <span>Kontynuuj bez logowania</span>
+            <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+          </button>
+
+          <div className="mt-6 text-sm text-gray-500 space-y-1">
+            <p>• Szybkie zamówienie</p>
+            <p>• Bez zakładania konta</p>
+            <p>• Możliwość rejestracji później</p>
+          </div>
+        </div>
 
           </div>
         </section>

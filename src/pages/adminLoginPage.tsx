@@ -4,6 +4,7 @@ import { useLoginAdmin } from "../hooks/useLoginAdmin";
 import { authenticateAdmin } from "../api/authenticateAdmin";
 import { useNavigate } from "react-router-dom";
 import { useAdminAuthStore } from "../store/adminAuthState";
+import { useAllPlants } from "../hooks/useAllPlants";
 
 const AdminLoginPage = () => {
   const [formData, setFormData] = useState<LoginForm>({
@@ -19,6 +20,8 @@ const AdminLoginPage = () => {
   const {setIsAuthenticated} = useAdminAuthStore();
 
   const navigate = useNavigate();
+
+  useAllPlants();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,7 +50,7 @@ const AdminLoginPage = () => {
 
     try {
       const jwt = await authenticateAdmin(token);
-      localStorage.setItem("jwtToken", jwt.token);
+      localStorage.setItem("adminToken", jwt.token);
       alert("Zalogowano pomyślnie!");
       setIsAuthenticated();
       navigate("/super/secret/admin/panel");

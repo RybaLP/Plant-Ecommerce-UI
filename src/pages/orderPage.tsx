@@ -14,12 +14,10 @@ import { useClientContactInfo } from "../hooks/useClientContactInfo";
 import ClientContactInfoForm from "../components/clientContactInfoForm";
 
 const OrderPage = () => {
-  // Stałe
   const makeOrder = "Złóż zamówienie";
   const payAndMakeOrder = "Złóż i opłać zamówienie";
   const navigate = useNavigate();
 
-  // Stany
   const [deliveryPrice, setDeliveryPrice] = useState(15.0);
   const [payOnDelivery, setPayOnDelivery] = useState(false);
   const [isCompanyOrder, setIsCompanyOrder] = useState(false);
@@ -34,7 +32,6 @@ const OrderPage = () => {
   const {
     setGuestInfo,
     guestEmail,
-    clearGuestForm,
     guestFirstName,
     guestLastName,
     guestPhone,
@@ -92,7 +89,7 @@ const OrderPage = () => {
           window.location.href = data.stripeCheckoutUrl;
         } else {
           toast.success("Zamówienie utworzone pomyślnie!");
-          navigate("/koszyk");
+          navigate("/zamowienie?orderNumber=" + data.orderNumber);
         }
       } catch (error) {
         toast.error("Nie udało się utworzyć zamówienia");

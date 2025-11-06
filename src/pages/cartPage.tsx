@@ -54,7 +54,6 @@ const CartPage = () => {
          </h2>
 
           <div className="flex space-x-4 text-gray-500">
-            <button className="hover:text-green-600 transition">❤️ Zapisz listę</button>
             <button
               onClick={handleWarningCart}
               className="hover:text-red-600 transition"
@@ -150,7 +149,6 @@ const CartPage = () => {
             Koszyk ({cart?.cartItems.length ?? 0} {cart?.cartItems.length === 1 ? "produkt" : "produkty"})
           </h2>
           <div className="flex space-x-4 text-gray-500">
-            <button className="hover:text-green-600 transition">❤️ Zapisz listę</button>
             <button
               onClick={() => setIsCleanCartWarning(true)}
               className="hover:text-red-600 transition"
@@ -207,7 +205,6 @@ const CartPage = () => {
                     ))}
                   </select>
 
-                  <button className="text-gray-400 hover:text-red-400 transition">❤️</button>
                   <button
                     onClick={() => deleteMutation.mutate(item.plant.id)}
                     className="text-gray-400 hover:text-red-500 transition"

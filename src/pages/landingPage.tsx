@@ -9,7 +9,7 @@ import CompanyDescription from '../components/companyDescription'
 
 const LandingPage = () => {
 
-  const {client, isLoading} = useClientInfo();
+  const {client} = useClientInfo();
   const setAuthenticated = useAuthenticationStore(state => state.setAuthenticated);
 
   useEffect(()=>{

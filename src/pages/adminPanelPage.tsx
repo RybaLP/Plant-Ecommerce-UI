@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAdminAuthStore } from "../store/adminAuthState";
 import NotAllowed from "../components/notAllowed";
-import AdminContent from "../components/admin/adminContent";
-import AdminSidebar from "../components/admin/adminSidebar";
+import AdminContent from "../components/admin/comp/adminContent";
+import AdminSidebar from "../components/admin/comp/adminSidebar";
 
 const AdminPanelPage = () => {
   const { isAuthenticated } = useAdminAuthStore();

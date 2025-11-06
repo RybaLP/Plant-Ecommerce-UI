@@ -10,7 +10,6 @@ import { Toaster } from "react-hot-toast"
 import OrderPage from "./pages/orderPage"
 import AuthenticationGatewayPage from "./pages/authenticationGatewayPage"
 import GuestOrderPage from "./pages/guestOrderPage"
-import { useAllPlants } from "./hooks/useAllPlants"
 import ResetPasswordPage from "./pages/resetPasswordPage"
 import NotFoundPage from "./pages/notFoundPage"
 import OrderConfirmationPage from "./pages/orderConfirmationPage"
@@ -26,15 +25,12 @@ import OrnamentalPlantsPage from "./pages/ornamentalPlantsPage"
 import AdminLoginPage from "./pages/adminLoginPage"
 import { useLocation } from "react-router-dom"
 import AdminPanelPage from "./pages/adminPanelPage"
+import CreatePlantPage from "./pages/createPlantPage"
 
 function App() {
 
    const location = useLocation();
    const hideLayout = location.pathname.startsWith("/super/secret/admin");
-
-  // initial FETCH of all plants
-  useAllPlants();
-
 
   return (
     <>
@@ -70,6 +66,7 @@ function App() {
           {/* admin */}
           <Route path="/super/secret/admin/login" element={<AdminLoginPage/>} /> 
           <Route path="/super/secret/admin/panel" element={<AdminPanelPage/>} /> 
+          <Route path="/super/secret/admin/panel/create-plant" element={<CreatePlantPage/>} />
 
         </Routes>
 
