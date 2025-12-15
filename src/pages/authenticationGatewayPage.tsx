@@ -15,7 +15,6 @@ const AuthenticationGatewayPage = () => {
 
   const navigate = useNavigate();
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
   const [emailToResetPassword,setEmailToResetPassword] = useState("");
   const [isForgotPasswordOpen,setIsForgotPasswordOpen] = useState(false);
 
@@ -36,7 +35,6 @@ const AuthenticationGatewayPage = () => {
     if(!formData.email) newErrors.email = "Email musi byc podany"
     if(!formData.password) newErrors.password = "Haslo musi byc podane"
 
-    setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
 

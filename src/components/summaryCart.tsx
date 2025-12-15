@@ -5,7 +5,7 @@ import { FaArrowCircleUp } from "react-icons/fa";
 
 const SummaryCart = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen] = useState(false);
     const [DiscountCode, setDiscountCode] = useState("");
 
   return (

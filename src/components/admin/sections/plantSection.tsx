@@ -4,11 +4,7 @@ import type { Plant } from "../../../interfaces/plant";
 import { AdminPlantCard } from "../comp/adminPlantCard";
 import CreatePlantForm from "../comp/forms/createPlantForm";
 
-interface Props {
-  isAuthenticated: boolean;
-}
-
-const PlantsSection = ({ isAuthenticated }: Props) => {
+const PlantsSection = () => {
   const plants: Plant[] = useQueryClient().getQueryData(["all-plants"]) ?? [];
   const [currentPage, setCurrentPage] = useState(1);
   

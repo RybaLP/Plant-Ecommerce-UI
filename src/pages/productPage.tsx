@@ -11,7 +11,7 @@ import { useGetPlantReviews } from '../hooks/useGetPlantReviews';
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const { plant, isLoading, isError } = usePlant(id!);
-  const {data : reviews , isLoading : reviewsLoading} = useGetPlantReviews(Number(id));
+  const {data : reviews} = useGetPlantReviews(Number(id));
 
   const { addToCart } = useAddToCart();
   const [quantity, setQuantity] = useState(1);

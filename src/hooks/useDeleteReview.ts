@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient , useMutation } from "@tanstack/react-query";
+import { useQueryClient , useMutation } from "@tanstack/react-query";
 import { deleteReview } from "../api/deleteReview";
 
 export const useDeleteReview = () => {

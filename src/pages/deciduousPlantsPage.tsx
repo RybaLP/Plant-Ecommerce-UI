@@ -20,7 +20,6 @@ const DeciduousPlantsPage = () => {
 
   const plantsList = plantsData?.content || [];
   const totalPages = plantsData?.totalPages || 1;
-  const totalPlants = plantsData?.totalElements || 0;
 
   const handleAddToCart = (items: { plantId: number, quantity: number, plant: Plant }) => {
     if (isAuthenticated) {

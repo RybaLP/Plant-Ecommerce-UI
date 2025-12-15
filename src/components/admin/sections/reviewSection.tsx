@@ -2,7 +2,7 @@ import { useFindAllReviews } from "../../../hooks/admin-hooks/useFindAllReviews"
 import ReviewCard from "../comp/reviewCard";
 
 const ReviewsSection = () => {
-  const { data: reviews, isLoading, isError } = useFindAllReviews();
+  const { data: reviews, isLoading } = useFindAllReviews();
 
   if (isLoading) {
     return (

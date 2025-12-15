@@ -4,7 +4,6 @@ import PlantsSection from '../sections/plantSection';
 import OrdersSection from '../sections/orderSection';
 import ReviewsSection from '../sections/reviewSection';
 import UsersSection from '../sections/usersSection';
-import { useAdminAuthStore } from '../../../store/adminAuthState';
 
 interface AdminContentProps {
   activeSection: string;
@@ -12,14 +11,12 @@ interface AdminContentProps {
 
 const AdminContent: React.FC<AdminContentProps> = ({ activeSection }) => {
 
-  const {isAuthenticated} = useAdminAuthStore();
-
   const renderSection = () => {
     switch (activeSection) {
       case 'orders':
         return <OrdersSection />;
       case 'plants':
-        return <PlantsSection isAuthenticated={isAuthenticated}/>;
+        return <PlantsSection/>;
       case 'reviews':
         return <ReviewsSection />;
       case 'users':

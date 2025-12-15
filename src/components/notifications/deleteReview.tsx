@@ -1,4 +1,4 @@
-import type { FormEvent, SetStateAction } from "react";
+import type { SetStateAction } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 
 interface Props {

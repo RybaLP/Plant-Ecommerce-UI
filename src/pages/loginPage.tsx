@@ -13,7 +13,6 @@ const LoginPage = () => {
   
   const [emailToResetPassword,setEmailToResetPassword] = useState("");
   const [isForgotPasswordOpen,setIsForgotPasswordOpen] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData , setFormData] = useState<LoginForm>({
       email : '',
       password : ''
@@ -46,7 +45,6 @@ const LoginPage = () => {
     if(!formData.email) newErrors.email = "Email musi byc podany"
     if(!formData.password) newErrors.password = "Haslo musi byc podane"
 
-    setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
 

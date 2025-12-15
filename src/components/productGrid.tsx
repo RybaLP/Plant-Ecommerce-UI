@@ -1,6 +1,5 @@
 import { useLandingPagePlants } from "../hooks/useLandingPagePlants";
 import type { Plant } from "../interfaces/plant";
-import { useAddToCart } from "../hooks/useAddToCart";
 import { useCart } from "../hooks/useCart";
 import { useAuthenticationStore } from "../store/authenticationStore";
 import { useCartStore } from "../store/useCartStore";
@@ -9,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 const ProductGrid = () => {
 
   const {plants} = useLandingPagePlants();
-  const {addToCart} = useAddToCart();
   const isAuthenticated = useAuthenticationStore(state => state.isAuthenticated);
   const {addMutate} = useCart();
   const {addItem} = useCartStore();

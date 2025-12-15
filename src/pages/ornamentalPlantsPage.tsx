@@ -21,7 +21,6 @@ const OrnamentalPlantsPage = () => {
 
     const plantsList: Plant[] = plantsData?.content || [];
     const totalPages = plantsData?.totalPages || 1;
-    const totalPlants = plantsData?.totalElements || 0;
 
     const sortedPlants: Plant[] = [...plantsList].sort((a, b) => {
         switch (filterType) {

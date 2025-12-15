@@ -26,7 +26,7 @@ export function useUpdateClientAddress() {
       if (context?.previousData) {
         queryClient.setQueryData(["client-contact-info"], context.previousData);
       }
-      toast.error("Nie udało się zaktualizować adresu.");
+      toast.error("Nie udało się zaktualizować adresu.", err as any);
     },
 
     onSuccess: (data) => {

@@ -1,5 +1,4 @@
 import { useClientInfo } from "../hooks/useClientInfo";
-import { useClientContactInfo } from "../hooks/useClientContactInfo";
 import { calculateDeliveryDay } from "../utils/calculateDeliveryDate";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -34,7 +33,6 @@ const DeliveryAndPayment = ({
   setDeliveryPrice,
   deliveryPrice,
   setPayOnDelivery,
-  setGuestInfo,
   setIsCompanyOrder,
   isCompanyOrder,
   isAddressFormOpen,

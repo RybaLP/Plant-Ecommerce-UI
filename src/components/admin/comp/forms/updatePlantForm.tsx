@@ -49,6 +49,7 @@ const UpdatePlantForm = ({ plant, setIsOpen }: Props) => {
   HERBAL: "Ziołowe",
   FRUIT: "Owocowe",
   OTHER: "Inne",
+  ORNAMENTAL : "Ozdobne"
 };
 
   

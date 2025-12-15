@@ -7,7 +7,7 @@ export const useCompleteUserOrder = () => {
 
     return useMutation({
         mutationFn : (reqBody : CreateUserOrder) => createUserOrder(reqBody),
-        onSuccess : (data) => {
+        onSuccess : () => {
             queryClient.invalidateQueries({queryKey : ["client-orders"]});
         }
     })

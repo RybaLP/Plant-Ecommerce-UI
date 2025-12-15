@@ -21,7 +21,6 @@ const ConiferousPage = () => {
 
   const plantsList : Plant[] = plantsData?.content || [];
   const totalPages = plantsData?.totalPages || 1;
-  const totalPlants = plantsData?.totalElements || 0;
 
   const filteredConiferousPlantsList = [...plantsList].sort(
     (a, b) => {
