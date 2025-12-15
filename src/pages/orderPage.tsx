@@ -9,9 +9,10 @@ import type { CreateGuestOrder } from "../interfaces/requests/createGuestOrder";
 import { createGuestOrder } from "../api/createGuestOrder.ts";
 import { useCartStore } from "../store/useCartStore";
 import toast from "react-hot-toast";
-import { useCompleteUserOrder } from "../hooks/useCompleteUserOrder";
 import { useClientContactInfo } from "../hooks/useClientContactInfo";
 import ClientContactInfoForm from "../components/clientContactInfoForm";
+import { createOrder } from "../api/createOrder.ts";
+import { handlePayment } from "../api/handlePayment.ts";
 
 const OrderPage = () => {
   const makeOrder = "Złóż zamówienie";
@@ -39,7 +40,6 @@ const OrderPage = () => {
   } = useGuestFormStore();
   const { cart } = useCartStore();
 
-  const { mutateAsync } = useCompleteUserOrder();
   const { clientContactInfo, isFetched } = useClientContactInfo();
 
   useEffect(() => {
@@ -59,15 +59,27 @@ const OrderPage = () => {
       };
 
       try {
-        const data = await mutateAsync(reqBody);
-        if (data.stripeCheckoutUrl) {
-          window.location.href = data.stripeCheckoutUrl;
+        const data = await createOrder(reqBody);
+
+        if (data.orderId && !payOnDelivery) {
+          const stripe = await handlePayment(data.orderId);
+          if (stripe.stripeCheckoutUrl){
+            window.location.href = stripe.stripeCheckoutUrl;
+          }
+          else {
+            toast.error("");
+            throw new Error("");
+          }
+
         } else {
+          toast.success("Zamówienie utworzone pomyślnie!");
           navigate("/zamowienie?orderNumber=" + data.orderNumber);
         }
+
       } catch (error) {
         toast.error("Nie udało się utworzyć zamówienia");
       }
+
     } else {
       const reqBody: CreateGuestOrder = {
         deliveryPrice: totalDeliveryPrice,
@@ -85,8 +97,16 @@ const OrderPage = () => {
 
       try {
         const data = await createGuestOrder(reqBody);
-        if (data.stripeCheckoutUrl) {
-          window.location.href = data.stripeCheckoutUrl;
+        if (data.orderId && !payOnDelivery) {
+          const stripe = await handlePayment(data.orderId);
+
+          if (stripe.stripeCheckoutUrl){
+            window.location.href = stripe.stripeCheckoutUrl;
+          } else {
+            toast.error("");
+            throw new Error("");
+          }
+
         } else {
           toast.success("Zamówienie utworzone pomyślnie!");
           navigate("/zamowienie?orderNumber=" + data.orderNumber);
