@@ -148,7 +148,10 @@ const OrderPage = () => {
 
           <button
             className="p-3 bg-emerald-500 text-xl mt-7 rounded-2xl cursor-pointer text-white w-full hover:bg-emerald-600 transition"
-            onClick={handleCreateOrder}
+            onClick={(e) => {
+              e.preventDefault();
+              handleCreateOrder();
+            }}
           >
             <span>{payOnDelivery ? makeOrder : payAndMakeOrder}</span>
           </button>
