@@ -24,7 +24,7 @@ const LoginFormComp = ({handleSubmit, handleChange, formData, isForgotPasswordOp
           <div className="w-full space-y-4 mb-6">
             {/* google oauth2*/}
             <a 
-              href={import.meta.env.VITE_API_URL}
+              href={import.meta.env.VITE_API_URL + "/oauth2/authorization/google"}
               className="flex items-center justify-center w-full bg-white text-gray-700 border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition-colors"
             >
               <FaGoogle size={24} className="mr-4" aria-hidden="true" />
