@@ -1,69 +1,87 @@
-# React + TypeScript + Vite
+# Plant E-commerce
+This is the frontend of the Plant E-commerce website.
+I aimed to build this application following best practices: it is fully responsive, optimized for performance using React Query, and features state management with Zustand (with persisted store).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The frontend is designed to work seamlessly with the backend, providing a smooth user experience for browsing products, managing the cart, placing orders, and handling authentication.
 
-Currently, two official plugins are available:
+##  Live Demo
+This project is a personal, non-commercial application hosted on free-tier hosting services.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- The **frontend** is always accessible: [Live Demo](https://plant-ecommerce-ui.onrender.com)
+- The **backend** may take a few seconds to start ("wake up") due to free hosting limitations.  
+  To use the app fully, make sure to open the backend link first: [Backend Host](https://plant-ecommerce-m9zd.onrender.com)
 
-## Expanding the ESLint configuration
+Additional resources:
+- [Backend Repository](https://github.com/RybaLP/Plant-Ecommerce)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
+- **Framework**: React Vite
+- **Libraries** : Zustand, React Tanstack Query, Axios
+- **Version Control:** Git, GitHub
+- **Deployment:** Render
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Features 
+- User registration and login
+- JWT authentication with refresh tokens
+- Cart management
+- Placing orders
+- Product operations
+- Adding, editing, and deleting reviews by clients
+- Stripe payment integration
+- Admin role features
+- Advanced product filtering and search
+- Order history and status tracking
+- Integrated with Backend
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├─ api               # Api clients, Api functions
+├─ components        # Reusable components
+├─ hooks             # React Query caching
+├─ interfaces        # Reusable TypeScript Interfaces
+├─ pages             # Pages
+├─ store             # Zustand stores (state management core)
+|- types             # Typing
+├─ utils             # Helper functions
+|- App,tsx           # Defined all routes
+|- main.tsx          # Core of application 
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  How to Run Locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Follow these steps to run the backend on your local machine:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/plant-ecommerce.git
+cd eccomerce
+```
+
+### 2. Configure environment variables
+Create a `.env` file in the root of the project and add the backend API URL:
+
+```bash
+# Backend API URL
+VITE_API_URL="http://example-api.com"
+```
+
+## 3. Run application
+Open terminal, and paste those commands in provided order : 
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The frontend will start on port 5173 by default.
+You can access it in your browser at:
+
+```
+http://localhost:5173
 ```
