@@ -1,6 +1,6 @@
 import { FaPhone, FaShoppingCart, FaBars, FaTimes, FaUser, FaShoppingBag, FaStar, FaMapMarkerAlt, FaSignOutAlt } from 'react-icons/fa';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuthenticationStore } from '../../../store/authenticationStore';
 
@@ -46,14 +46,15 @@ const MobileNavbar = () => {
   return (
     <>
       <div className="flex justify-between items-center py-3 px-4">
-        <a href="/" className="flex items-center">
+        <Link to={"/"} className="flex items-center">
           <div className="bg-white/10 p-2 rounded-xl mr-3">
             <span className="text-xl">🌿</span>
           </div>
           <span className="font-bold text-xl bg-gradient-to-r from-white to-emerald-100 bg-clip-text text-transparent">
             Roślinny Dom
           </span>
-        </a>
+        </Link>
+
 
         <button
           onClick={toggleMenu}
@@ -145,13 +146,11 @@ const MobileNavbar = () => {
             <ul className="space-y-2">
               {navigationItems.map((item) => (
                 <li key={item.href}>
-                  <a 
-                    href={item.href}
-                    onClick={closeMenu}
-                    className="flex items-center p-4 rounded-lg hover:bg-white/10 transition-all duration-200 text-white font-medium"
-                  >
+
+                  <Link to={item.href} onClick={closeMenu} className="flex items-center p-4 rounded-lg hover:bg-white/10 transition-all duration-200 text-white font-medium">
                     {item.label}
-                  </a>
+                  </Link>
+
                 </li>
               ))}
             </ul>
@@ -159,7 +158,7 @@ const MobileNavbar = () => {
 
           <div className="bg-white/10 rounded-xl p-4">
             <a 
-              href="tel:+48123456789" 
+              href='tel:+48123456789'
               className="flex items-center gap-3 text-white hover:text-emerald-100 transition-colors"
               onClick={closeMenu}
             >
@@ -168,14 +167,11 @@ const MobileNavbar = () => {
             </a>
           </div>
 
-          <a 
-            href="/koszyk"
-            onClick={closeMenu}
-            className="flex items-center gap-3 p-4 bg-white/10 rounded-xl hover:bg-white/15 transition-all duration-200"
-          >
+          <Link to={"/koszyk"} onClick={closeMenu} className='flex items-center gap-3 p-4 bg-white/10 rounded-xl hover:bg-white/15 transition-all duration-200'>
             <FaShoppingCart className="text-emerald-200" />
             <span className="text-white font-medium">Koszyk</span>
-          </a>
+          </Link>
+          
         </div>
       </div>
 
