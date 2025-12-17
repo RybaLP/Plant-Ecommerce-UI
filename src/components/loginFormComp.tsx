@@ -1,6 +1,6 @@
 import React, { type FormEvent, type SetStateAction } from 'react'
 import type { LoginForm } from '../interfaces/loginForm'
-import { FaFacebook , FaGoogle} from 'react-icons/fa'
+import { FaGoogle} from 'react-icons/fa'
 import ForgotPassword from './notifications/forgotPassword';
 
 interface Props {
@@ -22,14 +22,9 @@ const LoginFormComp = ({handleSubmit, handleChange, formData, isForgotPasswordOp
           <h2 className="text-xl font-bold text-gray-800 mb-6">ZALOGUJ SIĘ</h2>
 
           <div className="w-full space-y-4 mb-6">
-            <button className="flex items-center justify-center w-full bg-white text-gray-700 border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition-colors">
-              <FaFacebook size={24} className="mr-4 text-blue-600" aria-hidden="true" />
-              <span>FACEBOOK</span>
-            </button>
-
             {/* google oauth2*/}
             <a 
-              href="http://localhost:8080/oauth2/authorization/google"
+              href={import.meta.env.VITE_API_URL}
               className="flex items-center justify-center w-full bg-white text-gray-700 border border-gray-300 py-3 rounded-md hover:bg-gray-100 transition-colors"
             >
               <FaGoogle size={24} className="mr-4" aria-hidden="true" />
