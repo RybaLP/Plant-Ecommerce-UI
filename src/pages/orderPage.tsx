@@ -13,6 +13,7 @@ import { useClientContactInfo } from "../hooks/useClientContactInfo";
 import ClientContactInfoForm from "../components/clientContactInfoForm";
 import { createOrder } from "../api/createOrder.ts";
 import { handlePayment } from "../api/handlePayment.ts";
+import { guestPayment } from "../api/guestPayment.ts";
 
 const OrderPage = () => {
   const makeOrder = "Złóż zamówienie";
@@ -98,7 +99,7 @@ const OrderPage = () => {
       try {
         const data = await createGuestOrder(reqBody);
         if (data.orderId && !payOnDelivery) {
-          const stripe = await handlePayment(data.orderId);
+          const stripe = await guestPayment(data.orderId);
 
           if (stripe.stripeCheckoutUrl){
             window.location.href = stripe.stripeCheckoutUrl;
@@ -146,13 +147,11 @@ const OrderPage = () => {
             payOnDelivery={payOnDelivery}
           />
 
-          <button
-            className="p-3 bg-emerald-500 text-xl mt-7 rounded-2xl cursor-pointer text-white w-full hover:bg-emerald-600 transition"
-            onClick={(e) => {
-              e.preventDefault();
-              handleCreateOrder();
-            }}
-          >
+        <button
+          type="button"
+          className="p-3 bg-emerald-500 ..."
+          onClick={handleCreateOrder}
+        >
             <span>{payOnDelivery ? makeOrder : payAndMakeOrder}</span>
           </button>
         </div>
